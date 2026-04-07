@@ -1,83 +1,33 @@
-Topic- Fault Classification in Industrial Machinery using SVM
- Problem Statement-
-In predictive maintenance, early and accurate identification of faulty machine components is crucial to minimize downtime, reduce maintenance costs, and ensure operational safety.
+## Fault Classification in Industrial Machinery using SVM
+## Overview
 
-This project focuses on building a Support Vector Machine (SVM) model for multi-class fault classification from high-dimensional and imbalanced sensor data.
+This project focuses on detecting different types of machine faults using sensor data. A Support Vector Machine (SVM) model is built to handle high-dimensional and imbalanced data for accurate multi-class classification.
 
- Dataset Overview-
+## Dataset
 Samples: 1941
+Features: 27 numerical features
+Classes (7): Pastry, Z_Scratch, K_Scatch, Stains, Dirtiness, Bumps, Other_Faults
 
-Features: 27 numerical (sensor values, geometric parameters, etc.)
+Binary class columns are combined into a single target label (single-label classification).
 
-Target Classes (7 types):
-
-Pastry
-
-Z_Scratch
-
-K_Scatch
-
-Stains
-
-Dirtiness
-
-Bumps
-
-Other_Faults
-
- Each class is a binary column, but assume single-label classification unless otherwise specified.
-
- Project Pipeline-
-1. Data Preprocessing
-Combine binary target columns into a single label.
-
-Handle missing/null values.
-
-Feature scaling using StandardScaler or MinMaxScaler.
-
-2. Exploratory Data Analysis (EDA)
-Plot class distribution to assess imbalance.
-
-Correlation heatmap of features.
-
-Visualize separability with PCA or t-SNE.
-
-3. Handling Class Imbalance
-Use class_weight='balanced' in SVM.
-
-Apply SMOTE or a combination of over/under-sampling techniques.
-
-4. Model Building: SVM
-Use sklearn.svm.SVC with:
-
-Kernel: RBF / Polynomial
-
-Hyperparameter Tuning: GridSearchCV or RandomizedSearchCV
-
-Class weights to address imbalance
-
-5. Evaluation Metrics
+## Approach
+Preprocessing: Handle missing values, merge labels, apply scaling
+EDA: Class distribution, correlation heatmap, PCA/t-SNE visualization
+Imbalance Handling: class_weight, SMOTE
+Model: SVM (RBF / Polynomial kernel)
+Tuning: GridSearchCV / RandomizedSearchCV
+Evaluation
 Accuracy
+F1 Score (macro, weighted)
+Confusion Matrix
 
-F1 Score (macro and weighted)
+(Optional: Hamming Loss, Subset Accuracy for multi-label)
 
-Confusion Matrix & Classification Report
+## Extras
+PCA for visualization
+LIME / SHAP for interpretability
+Comparison with Random Forest, XGBoost, Logistic Regression
+Conclusion
 
-For multi-label (if applied): Hamming Loss, Subset Accuracy
-
-6. Model Interpretability
-Use PCA for 2D decision boundary plots
-
-Apply LIME or SHAP (via wrappers) to understand feature influence
-
-7. (Optional) Comparative Analysis
-Compare SVM with:
-
-Random Forest
-
-XGBoost
-
-Logistic Regression
-
-Analyze trade-offs in accuracy, interpretability, and computation time
+Shows that SVM can perform well on imbalanced industrial datasets with proper preprocessing and tuning.retability, and computation time
 
