@@ -1,4 +1,4 @@
-## Steel Surface Fault Detection using Machine Learning
+## Steel  Fault Detection using Machine Learning
 
 This project implements a multi-class fault classification system for detecting surface defects in steel plates using machine learning models. It evaluates multiple algorithms and an ensemble approach to achieve robust performance on industrial data.
 
