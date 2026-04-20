@@ -14,14 +14,14 @@ Models:
   * XGBoost
   * Stacking Classifier (Ensemble)
 Libraries:
-  * Scikit-learn
+   * Scikit-learn
    * Pandas
    * NumPy
    * Matplotlib
    * Seaborn
    * Imbalance Handling: SMOTE
    * Deployment: Streamlit + Pickle
-Dataset
+Dataset:
    * Samples: 1941
    * Features: 27 numerical features
 Classes (7):
