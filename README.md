@@ -13,6 +13,7 @@ Models:
   * Random Forest
   * XGBoost
   * Stacking Classifier (Ensemble)
+
 Libraries:
    * Scikit-learn
    * Pandas
@@ -21,9 +22,11 @@ Libraries:
    * Seaborn
    * Imbalance Handling: SMOTE
    * Deployment: Streamlit + Pickle
+
 Dataset:
    * Samples: 1941
    * Features: 27 numerical features
+
 Classes (7):
    * Pastry
    * Z_Scratch
