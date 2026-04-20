@@ -1,68 +1,118 @@
-# Fault Classification in Industrial Machinery using SVM  
+## Steel Surface Fault Detection using Machine Learning
 
-## Overview  
-This project focuses on detecting different types of machine faults using sensor data. A Support Vector Machine (SVM) model is built to handle high-dimensional and imbalanced data for accurate multi-class classification.
+This project implements a multi-class fault classification system for detecting surface defects in steel plates using machine learning models. It evaluates multiple algorithms and an ensemble approach to achieve robust performance on industrial data.
 
----
+## Overview
 
-## Dataset  
-- **Samples:** 1941  
-- **Features:** 27 numerical features  
-- **Classes (7):**  
-  - Pastry  
-  - Z_Scratch  
-  - K_Scatch  
-  - Stains  
-  - Dirtiness  
-  - Bumps  
-  - Other_Faults  
+The goal of this project is to build a reliable and scalable defect detection system using sensor-based features.
+Multiple models are trained and compared to handle high-dimensional data, class imbalance, and multi-class classification. A stacking classifier is also implemented to combine model strengths.
 
-Binary class columns are combined into a single target label (single-label classification).
+## Tech Stack
+Models:
+  Support Vector Machine (SVM)
+  Random Forest
+  XGBoost
+  Stacking Classifier (Ensemble)
+Libraries:
+  Scikit-learn
+  XGBoost
+  Pandas
+  NumPy
+  Matplotlib
+  Seaborn
+  Imbalance Handling: SMOTE
+  Deployment: Streamlit + Pickle
+Dataset
+  Samples: 1941
+  Features: 27 numerical features
+Classes (7):
+  Pastry
+  Z_Scratch
+  K_Scatch
+  Stains
+  Dirtiness
+  Bumps
+  Other_Faults
 
----
+Multi-label columns are converted into a single-label classification problem.
 
-## Approach  
+## Key Features
+  Multi-class classification using three ML models
+  Ensemble learning using stacking classifier
+  Handles class imbalance using SMOTE and class weights
+  Hyperparameter tuning using GridSearchCV
+  Cross-validation for robust evaluation
+  Saved model and scaler for real-time predictions
+  
+## Approach
+Data Preprocessing
+  Missing value handling
+  Multi-label to single-label conversion
+  Feature scaling
+Exploratory Data Analysis
+  Class distribution analysis
+  Correlation heatmap
+  PCA and t-SNE visualization
+Model Training
+  Support Vector Machine (RBF kernel)
+  Random Forest
+  XGBoost
+Hyperparameter Tuning
+  GridSearchCV with 10-fold cross-validation
 
-- **Preprocessing:**  
-  - Handle missing values  
-  - Merge binary labels  
-  - Feature scaling (StandardScaler / MinMaxScaler)  
+## Best parameters:
 
-- **EDA:**  
-  - Class distribution  
-  - Correlation heatmap  
-  - PCA / t-SNE visualization  
+SVM: C=10, gamma=0.1, kernel=rbf
+Random Forest: n_estimators=200, max_depth=None
+XGBoost: learning_rate=0.1, max_depth=5, n_estimators=200
 
-- **Imbalance Handling:**  
-  - `class_weight='balanced'`  
-  - SMOTE  
+## Results
+Individual models
+| Model         | Accuracy | Weighted F1 | Hamming Loss |
+| ------------- | -------- | ----------- | ------------ |
+| SVM           | 0.7609   | 0.7604      | 0.2391       |
+| Random Forest | 0.8021   | 0.8018      | 0.1979       |
+| XGBoost       | 0.7969   | 0.7975      | 0.2031       |
 
-- **Model:**  
-  - SVM (RBF / Polynomial kernel)  
+Ensemble model
+| Model               | Accuracy | Weighted F1 | Hamming Loss |
+| ------------------- | -------- | ----------- | ------------ |
+| Stacking Classifier | 0.7969   | 0.80        | 0.2031       |
 
-- **Hyperparameter Tuning:**  
-  - GridSearchCV / RandomizedSearchCV  
+## Key Insights
+  Random Forest achieved the highest individual accuracy
+  XGBoost provided balanced performance across classes
+  SVM performed well after tuning but was slightly lower than ensemble methods
+  Stacking classifier improved overall robustness by combining models
+  SMOTE significantly improved minority class prediction
 
----
+## Project Structure
+```
+├── SteelFault_Detection.ipynb
+├── steel_fault_detection.py
+├── app.py
+├── model.pkl
+├── scaler.pkl
+├── steel_plates_faults.csv
+├── README.md
+```
 
-## Evaluation  
+## Deployment
+1. Install dependencies
+ ```
+pip install -r requirements.txt
+```
+2. Run the application
+```
+streamlit run app.py
+```
 
-- Accuracy  
-- F1 Score (macro, weighted)  
-- Confusion Matrix  
+## Conclusion
 
-(Optional for multi-label: Hamming Loss, Subset Accuracy)
+This project demonstrates how multiple machine learning models along with ensemble techniques can effectively solve industrial fault detection problems. Random Forest and XGBoost performed strongly, while stacking improved overall robustness.
 
----
-
-## Additional Work  
-
-- PCA for visualization  
-- LIME / SHAP for interpretability  
-- Comparison with Random Forest, XGBoost, Logistic Regression  
-
----
-
-## Conclusion  
-
-This project demonstrates that SVM can effectively handle imbalanced industrial datasets when combined with proper preprocessing and tuning.
+## Author 
+```
+Chirag Sharma
+MSIT
+```
