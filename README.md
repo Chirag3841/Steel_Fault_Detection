@@ -9,62 +9,60 @@ Multiple models are trained and compared to handle high-dimensional data, class 
 
 ## Tech Stack
 Models:
-  Support Vector Machine (SVM)
-  Random Forest
-  XGBoost
-  Stacking Classifier (Ensemble)
+  * Support Vector Machine (SVM)
+  * Random Forest
+  * XGBoost
+  * Stacking Classifier (Ensemble)
 Libraries:
-  Scikit-learn
-  XGBoost
-  Pandas
-  NumPy
-  Matplotlib
-  Seaborn
-  Imbalance Handling: SMOTE
-  Deployment: Streamlit + Pickle
+  * Scikit-learn
+   * Pandas
+   * NumPy
+   * Matplotlib
+   * Seaborn
+   * Imbalance Handling: SMOTE
+   * Deployment: Streamlit + Pickle
 Dataset
-  Samples: 1941
-  Features: 27 numerical features
+   * Samples: 1941
+   * Features: 27 numerical features
 Classes (7):
-  Pastry
-  Z_Scratch
-  K_Scatch
-  Stains
-  Dirtiness
-  Bumps
-  Other_Faults
+   * Pastry
+   * Z_Scratch
+   * K_Scatch
+   * Stains
+   * Dirtiness
+   * Bumps
+   * Other_Faults
 
 Multi-label columns are converted into a single-label classification problem.
 
 ## Key Features
-  Multi-class classification using three ML models
-  Ensemble learning using stacking classifier
-  Handles class imbalance using SMOTE and class weights
-  Hyperparameter tuning using GridSearchCV
-  Cross-validation for robust evaluation
-  Saved model and scaler for real-time predictions
-  
+   * Multi-class classification using multiple ML models
+   * Model comparison and performance evaluation
+   * Ensemble learning using stacking classifier
+   * Handles class imbalance using SMOTE and class weights
+   * Hyperparameter tuning using GridSearchCV
+   * Model saving for real-time prediction
 ## Approach
 Data Preprocessing
-  Missing value handling
-  Multi-label to single-label conversion
-  Feature scaling
+  * Missing value handling
+  * Multi-label to single-label conversion
+  * Feature scaling
 Exploratory Data Analysis
-  Class distribution analysis
-  Correlation heatmap
-  PCA and t-SNE visualization
+  * Class distribution analysis
+  * Correlation heatmap
+  * PCA and t-SNE visualization
 Model Training
-  Support Vector Machine (RBF kernel)
-  Random Forest
-  XGBoost
+  * Support Vector Machine (RBF kernel)
+  * Random Forest
+  * XGBoost
 Hyperparameter Tuning
-  GridSearchCV with 10-fold cross-validation
+  * GridSearchCV with 10-fold cross-validation
 
 ## Best parameters:
 
-SVM: C=10, gamma=0.1, kernel=rbf
-Random Forest: n_estimators=200, max_depth=None
-XGBoost: learning_rate=0.1, max_depth=5, n_estimators=200
+* SVM: C=10, gamma=0.1, kernel=rbf
+* Random Forest: n_estimators=200, max_depth=None
+* XGBoost: learning_rate=0.1, max_depth=5, n_estimators=200
 
 ## Results
 Individual models
@@ -80,11 +78,11 @@ Ensemble model
 | Stacking Classifier | 0.7969   | 0.80        | 0.2031       |
 
 ## Key Insights
-  Random Forest achieved the highest individual accuracy
-  XGBoost provided balanced performance across classes
-  SVM performed well after tuning but was slightly lower than ensemble methods
-  Stacking classifier improved overall robustness by combining models
-  SMOTE significantly improved minority class prediction
+  * Random Forest achieved the highest individual accuracy
+  * XGBoost provided balanced performance across classes
+  * SVM performed well after tuning but was slightly lower than ensemble methods
+  * Stacking classifier improved overall robustness by combining models
+  * SMOTE significantly improved minority class prediction
 
 ## Project Structure
 ```
