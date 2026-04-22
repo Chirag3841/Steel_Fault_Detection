@@ -79,7 +79,7 @@ html, body, [data-testid="stAppViewContainer"] {
     box-sizing: border-box;
 }
 .brand-strip .company { font-family: 'Barlow Condensed', sans-serif; font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: 3px; text-transform: uppercase; margin: 0; line-height: 1.1; white-space: nowrap; }
-.brand-strip .tagline { font-size: 0.7rem; color: rgba(255,255,255,0.85); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; white-space: nowrap; }
+.brand-strip .tagline { font-size: 0.62rem; color: rgba(255,255,255,0.85); letter-spacing: 1.5px; text-transform: uppercase; margin-top: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
 /* ── Sidebar nav label ── */
 .nav-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #4a5568; padding: 18px 20px 8px 20px; display: block; }
@@ -88,13 +88,16 @@ html, body, [data-testid="stAppViewContainer"] {
 [data-testid="stRadio"] { padding: 0 12px; }
 [data-testid="stRadio"] > div { gap: 4px !important; }
 [data-testid="stRadio"] label {
-    font-size: 0.9rem !important;
+    font-size: 0.82rem !important;
     color: #94a3b8 !important;
-    padding: 8px 12px !important;
+    padding: 8px 10px !important;
     border-radius: 6px !important;
     width: 100% !important;
     display: block !important;
     cursor: pointer !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
     transition: background 0.15s, color 0.15s !important;
 }
 [data-testid="stRadio"] label:hover { background: #1c2333 !important; color: #f97316 !important; }
@@ -324,7 +327,7 @@ st.sidebar.markdown("""
 
 st.sidebar.markdown('<div class="nav-label">Navigation</div>', unsafe_allow_html=True)
 page = st.sidebar.radio(
-    "nav",
+    "",
     ["📊  Analysis", "🔬  Predict", "📋  System Info"],
     label_visibility="collapsed"
 )
@@ -345,7 +348,7 @@ else:
     st.sidebar.markdown('<div class="status-block status-warn">⚠ model.pkl not found</div>', unsafe_allow_html=True)
 
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
-st.sidebar.markdown("<p style='font-size:0.65rem;color:#1c2333;text-align:center;letter-spacing:2px;text-transform:uppercase'>SteelGuard v1.0 · Industrial ML</p>", unsafe_allow_html=True)
+st.sidebar.markdown("<p style='font-size:0.65rem;color:#4a5568;text-align:center;letter-spacing:2px;text-transform:uppercase;padding:8px 0'>SteelGuard v1.0 · Industrial ML</p>", unsafe_allow_html=True)
 
 # ── Force sidebar to always stay open ─────────────────────────────────────────
 st.markdown("""
