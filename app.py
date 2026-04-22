@@ -15,6 +15,32 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# ─── Force sidebar always open via JS ────────────────────────────────────────
+st.markdown("""
+<script>
+(function keepSidebarOpen() {
+    const hide = setInterval(() => {
+        const btns = window.parent.document.querySelectorAll(
+            '[data-testid="collapsedControl"], [data-testid="stSidebarCollapsedControl"], [data-testid="baseButton-headerNoPadding"]'
+        );
+        btns.forEach(b => b.style.display = 'none');
+
+        const sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
+        if (sidebar) {
+            sidebar.style.transform = 'translateX(0)';
+            sidebar.style.minWidth = '260px';
+            sidebar.style.width = '260px';
+            sidebar.style.marginLeft = '0';
+            if (sidebar.getAttribute('aria-expanded') === 'false') {
+                sidebar.setAttribute('aria-expanded', 'true');
+            }
+        }
+    }, 400);
+    setTimeout(() => clearInterval(hide), 10000);
+})();
+</script>
+""", unsafe_allow_html=True)
+
 # ─── CSS ────────────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
@@ -37,36 +63,73 @@ html, body, [data-testid="stAppViewContainer"] {
     background: #0d1117 !important;
     border-right: 1px solid #1c2333 !important;
     padding-top: 0 !important;
+    min-width: 300px !important;
+    max-width: 300px !important;
+    width: 300px !important;
 }
-[data-testid="stSidebar"] > div:first-child { padding-top: 0; }
+[data-testid="stSidebar"] > div:first-child { padding-top: 0; min-width: 300px !important; }
+[data-testid="stSidebar"] section { min-width: 300px !important; }
 
 /* ── Sidebar top brand strip ── */
 .brand-strip {
     background: #f97316;
-    padding: 18px 20px 14px 20px;
+    padding: 22px 24px 18px 24px;
     margin-bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
-.brand-strip .company { font-family: 'Barlow Condensed', sans-serif; font-size: 1.4rem; font-weight: 800; color: #fff; letter-spacing: 2px; text-transform: uppercase; margin: 0; line-height: 1; }
-.brand-strip .tagline { font-size: 0.65rem; color: rgba(255,255,255,0.75); letter-spacing: 3px; text-transform: uppercase; margin-top: 3px; }
+.brand-strip .company { font-family: 'Barlow Condensed', sans-serif; font-size: 1.8rem; font-weight: 800; color: #fff; letter-spacing: 3px; text-transform: uppercase; margin: 0; line-height: 1.1; white-space: nowrap; }
+.brand-strip .tagline { font-size: 0.7rem; color: rgba(255,255,255,0.85); letter-spacing: 2px; text-transform: uppercase; margin-top: 4px; white-space: nowrap; }
 
 /* ── Sidebar nav label ── */
-.nav-label { font-size: 0.65rem; font-weight: 600; letter-spacing: 3px; text-transform: uppercase; color: #4a5568; padding: 18px 20px 8px 20px; }
+.nav-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: #4a5568; padding: 18px 20px 8px 20px; display: block; }
+
+/* ── Navigation radio buttons ── */
+[data-testid="stRadio"] { padding: 0 12px; }
+[data-testid="stRadio"] > div { gap: 4px !important; }
+[data-testid="stRadio"] label {
+    font-size: 0.9rem !important;
+    color: #94a3b8 !important;
+    padding: 8px 12px !important;
+    border-radius: 6px !important;
+    width: 100% !important;
+    display: block !important;
+    cursor: pointer !important;
+    transition: background 0.15s, color 0.15s !important;
+}
+[data-testid="stRadio"] label:hover { background: #1c2333 !important; color: #f97316 !important; }
+[data-testid="stRadio"] [aria-checked="true"] + div label,
+[data-testid="stRadio"] label[data-checked="true"] { color: #f97316 !important; background: #1a0e04 !important; }
 
 /* ── Sidebar status ── */
-.status-block { margin: 0 12px; padding: 10px 14px; border-radius: 6px; font-size: 0.8rem; }
+.status-block { margin: 0 12px; padding: 10px 14px; border-radius: 6px; font-size: 0.82rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .status-ok   { background: #0d2818; border: 1px solid #16a34a; color: #4ade80; }
 .status-warn { background: #1c1404; border: 1px solid #d97706; color: #fbbf24; }
+
+/* ── Main content area ── */
+.main .block-container {
+    padding-top: 1.5rem !important;
+    padding-left: 2.5rem !important;
+    padding-right: 2.5rem !important;
+    max-width: 100% !important;
+}
+
+/* ── Force sidebar always visible ── */
+[data-testid="collapsedControl"]                { display: none !important; }
+[data-testid="stSidebarCollapsedControl"]       { display: none !important; }
+button[data-testid="baseButton-headerNoPadding"]{ display: none !important; }
+[data-testid="stSidebar"][aria-expanded="false"]{ margin-left: 0 !important; transform: translateX(0) !important; display: flex !important; min-width: 300px !important; }
 
 /* ── Top bar ── */
 .topbar {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 12px 0 20px 0;
+    padding: 16px 0 20px 0;
     border-bottom: 1px solid #1c2333;
     margin-bottom: 24px;
 }
-.topbar .page-title { font-family: 'Barlow Condensed', sans-serif; font-size: 1.8rem; font-weight: 700; color: #e2e8f0; letter-spacing: 1px; text-transform: uppercase; margin: 0; }
-.topbar .breadcrumb { font-size: 0.7rem; color: #4a5568; letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; }
-.topbar .badge { background: #f97316; color: #fff; font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; border-radius: 3px; }
+.topbar .page-title { font-family: 'Barlow Condensed', sans-serif; font-size: 2rem; font-weight: 700; color: #e2e8f0 !important; letter-spacing: 1px; text-transform: uppercase; margin: 0; display: block !important; visibility: visible !important; }
+.topbar .breadcrumb { font-size: 0.7rem; color: #4a5568; letter-spacing: 2px; text-transform: uppercase; margin-top: 2px; display: block !important; }
+.topbar .badge { background: #f97316; color: #fff; font-size: 0.65rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 4px 10px; border-radius: 3px; white-space: nowrap; }
 
 /* ── KPI cards ── */
 .kpi-row { display: flex; gap: 12px; margin-bottom: 24px; }
@@ -260,7 +323,11 @@ st.sidebar.markdown("""
 """, unsafe_allow_html=True)
 
 st.sidebar.markdown('<div class="nav-label">Navigation</div>', unsafe_allow_html=True)
-page = st.sidebar.radio("", ["📊  Analysis", "🔬  Predict", "📋  System Info"], label_visibility="collapsed")
+page = st.sidebar.radio(
+    "nav",
+    ["📊  Analysis", "🔬  Predict", "📋  System Info"],
+    label_visibility="collapsed"
+)
 
 st.sidebar.markdown('<div class="nav-label">Data Source</div>', unsafe_allow_html=True)
 uploaded_file = st.sidebar.file_uploader("", type=["csv"], label_visibility="collapsed")
@@ -279,6 +346,33 @@ else:
 
 st.sidebar.markdown("<br>", unsafe_allow_html=True)
 st.sidebar.markdown("<p style='font-size:0.65rem;color:#1c2333;text-align:center;letter-spacing:2px;text-transform:uppercase'>SteelGuard v1.0 · Industrial ML</p>", unsafe_allow_html=True)
+
+# ── Force sidebar to always stay open ─────────────────────────────────────────
+st.markdown("""
+<script>
+(function keepSidebarOpen() {
+    function expand() {
+        // Find the collapse button and hide it
+        var btns = window.parent.document.querySelectorAll('[data-testid="collapsedControl"], [data-testid="stSidebarCollapsedControl"]');
+        btns.forEach(function(b) { b.style.display = 'none'; });
+
+        // If sidebar is collapsed, click the expand button
+        var sidebar = window.parent.document.querySelector('[data-testid="stSidebar"]');
+        if (sidebar && sidebar.getAttribute('aria-expanded') === 'false') {
+            var expandBtn = window.parent.document.querySelector('[data-testid="stSidebarContent"]');
+            // Try to find and click the open button
+            var openBtns = window.parent.document.querySelectorAll('button[kind="header"]');
+            openBtns.forEach(function(b) {
+                if (b.getAttribute('aria-expanded') === 'false') { b.click(); }
+            });
+        }
+    }
+    // Run on load and observe DOM changes
+    expand();
+    setInterval(expand, 500);
+})();
+</script>
+""", unsafe_allow_html=True)
 
 
 # ════════════════════════════════════════════════════════════════════════════════
