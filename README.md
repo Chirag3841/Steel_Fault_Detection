@@ -89,6 +89,8 @@ Ensemble model
 
 ## Project Structure
 ```
+├── .streamlit
+    ├── config.toml
 ├── SteelFault_Detection.ipynb
 ├── steel_fault_detection.py
 ├── app.py
