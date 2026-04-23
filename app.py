@@ -684,6 +684,7 @@ elif page == "📋  System Info":
             <h4>Required Files</h4>
             <table class="spec-table">
                 <tr><th>File</th><th>Purpose</th></tr>
+                <tr><td><code>steel_fault_detection.py</code></td><td>Fault detection logic</td></tr>
                 <tr><td><code>app.py</code></td><td>Application entry point</td></tr>
                 <tr><td><code>model.pkl</code></td><td>Trained StackingClassifier</td></tr>
                 <tr><td><code>scaler.pkl</code></td><td>Fitted StandardScaler</td></tr>
