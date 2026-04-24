@@ -299,12 +299,12 @@ def load_and_preprocess(uploaded_file):
 
 @st.cache_resource
 def load_model():
-    p = r"C:\Github_Projects\steel_fault_detection\model.pkl"
+    p = os.path.join(os.path.dirname(__file__), "model.pkl")
     return joblib.load(p) if os.path.exists(p) else None
 
 @st.cache_resource
 def load_scaler():
-    p = r"C:\Github_Projects\steel_fault_detection\scaler.pkl"
+    p = os.path.join(os.path.dirname(__file__), "scaler.pkl")
     return joblib.load(p) if os.path.exists(p) else None
 
 def predict_single(df, scaler, model):
