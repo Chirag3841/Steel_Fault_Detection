@@ -110,9 +110,7 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 3. Deployed application link
-```
-https://steel-fault-detection.streamlit.app/
-```
+- https://steel-fault-detection.streamlit.app/
 
 ## Conclusion
 
